@@ -1,13 +1,13 @@
 # CTKD
 
-This repo is the official pytorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023)
+This repo is the official pytorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023) https://arxiv.org/abs/2211.16231
 
 ### Abstract
 
 CTKD organizes the distillation task from easy to hard through a dynamic and learnable temperature. 
 The temperature is learned during the student’s training process with a reversed gradient that aims to maximize the distillation loss (i.e., increase the learning difficulty) between teacher and student in an adversarial manner.
 
-As an easy-touse plug-in technique, CTKD can be seamlessly integrated
+As an easy-to-use plug-in technique, CTKD can be seamlessly integrated
 into existing state-of-the-art knowledge distillation frameworks and brings general improvements at a negligible additional computation cost.
 
 ### Framework 
@@ -47,7 +47,7 @@ On ImageNet:
 | CIFAR teacher models   | [[Baidu Yun]](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)  [Google] |
 | ImageNet teacher models  | [[Baidu Yun]](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)  [Google] |
 
-If you want to train your own teacher model, please consider use `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
+If you want to train your teacher model, please consider using `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
 
 2. Training on CIFAR-100:
 - Download the dataset and change the path in `./dataset/cifar100.py line 27` to your current dataset path.
@@ -66,13 +66,13 @@ If you want to train your own teacher model, please consider use `./scripts/run_
     ```
 
 ## Model Zoo
-We provide pcomlete training configs, logs and models for your reference.
+We provide complete training configs, logs, and models for your reference.
 
 CIFAR-100:
 - Combing CTKD with vanilla KD:  
 [Baidu Yun] [Google]
 
-- Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL and DKD.  
+- Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL, and DKD.  
 (Teacher: RN-56, Student: RN-20)  
 [[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [Google]
 
