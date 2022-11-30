@@ -72,7 +72,7 @@ CIFAR-100:
 - Combing CTKD with vanilla KD:  
 [Baidu Yun] [Google]
 
-- Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL and DKD. 
+- Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL and DKD.  
 (Teacher: RN-56, Student: RN-20)  
 [[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [Google]
 
@@ -80,3 +80,4 @@ ImageNet-2012:
 - Combing CTKD with vanilla KD:  
 [Baidu Yun] [Google]
 
+This repo is not finished yet, I will keep updating the content.
