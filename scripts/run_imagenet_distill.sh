@@ -11,7 +11,7 @@
 # SRRL
 # python train_student.py --path-t ./save/models/resnet56_vanilla/ckpt_epoch_240.pth --distill srrl --model_s resnet20 -r 1 -a 1 -b 1
 # DKD
-# python train_student.py --path-t ./save/models/resnet56_vanilla/ckpt_epoch_240.pth --distill srrl --model_s resnet20 -r 1 -a 0 -b 1 -dkd_alpha -dkd_beta 
+# python train_student.py --path-t ./save/models/resnet56_vanilla/ckpt_epoch_240.pth --distill srrl --model_s resnet20 -r 1 -a 0 -b 1 --dkd_alpha 1 --dkd_beta 1
 
 
 python3 train_student.py --path-t ./save/models/ResNet34/resnet34.pth \
