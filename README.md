@@ -18,6 +18,13 @@ into existing state-of-the-art knowledge distillation frameworks and brings gene
 
 (b) Following the easy-to-hard curriculum, we gradually increase the parameter λ, leading to increased learning difficulty w.r.t. temperature for the student.
 
+### Visualization
+
+The learning curves of temperature during training:
+
+<div style="text-align:center"><img src="figure/temp_curve.png" width="100%" ></div>
+
+
 ### Main Results
 
 | Teacher <br> Student |RN-56 <br> RN-20|RN-110 <br> RN-32| RN-110 <br> RN-20| WRN-40-2 <br> WRN-16-2| WRN-40-2 <br> WRN-40-1 | VGG-13 <br> VGG-8|
@@ -40,7 +47,7 @@ On ImageNet:
 
 ## Running
 
-1. Download the pretrained teacher models and put them to `./save/models`
+1. Download the pretrained teacher models and put them to `./save/models`.
 
 |  Dataset | Download |
 |:---------------:|:-----------------:|
@@ -48,6 +55,8 @@ On ImageNet:
 | ImageNet teacher models  | [[Baidu Yun]](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)  [Google] |
 
 If you want to train your teacher model, please consider using `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
+
+After the training process, put your teacher model to `./save/models`.
 
 2. Training on CIFAR-100:
 - Download the dataset and change the path in `./dataset/cifar100.py line 27` to your current dataset path.
@@ -74,7 +83,7 @@ CIFAR-100:
 
 - Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL, and DKD.  
 (Teacher: RN-56, Student: RN-20)  
-[[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [Google]
+[[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [[Google]](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)
 
 ImageNet-2012:
 - Combing CTKD with vanilla KD:  
