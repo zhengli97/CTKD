@@ -27,12 +27,14 @@ The learning curves of temperature during training:
 
 ### Main Results
 
+On CIFAR-100:
+
 | Teacher <br> Student |RN-56 <br> RN-20|RN-110 <br> RN-32| RN-110 <br> RN-20| WRN-40-2 <br> WRN-16-2| WRN-40-2 <br> WRN-40-1 | VGG-13 <br> VGG-8|
 |:---------------:|:-----------------:|:-----------------:|:-----------------:|:------------------:|:------------------:|:--------------------:|
 | KD | 70.66 | 73.08 | 70.66 | 74.92 | 73.54 | 72.98 |
 | **+CTKD** | **71.19** | **73.52** | **70.99** | **75.45** | **73.93** | **73.52** |
 
-On ImageNet:
+On ImageNet-2012:
 
 |                 | Teacher <br> (RN-34) | Student <br> (RN-18) | KD | +CTKD 
 |:---------------:|:---------------:|:-----------------:|:-----------------:|:-----------------:|
@@ -89,4 +91,19 @@ ImageNet-2012:
 - Combing CTKD with vanilla KD:  
 [Baidu Yun] [Google]
 
+
 This repo is not finished yet, I will keep updating the content.
+
+## Citation
+
+If this repo is helpful for your research, please consider citing our paper:
+
+```
+@article{li2022curriculum,
+  title={Curriculum Temperature for Knowledge Distillation},
+  author={Li, Zheng and Li, Xiang and Yang, Lingfeng and Zhao, Borui and Song, Renjie and Luo, Lei and Li, Jun and Yang, Jian},
+  journal={arXiv preprint arXiv:2211.16231},
+  year={2022}
+}
+```
+
