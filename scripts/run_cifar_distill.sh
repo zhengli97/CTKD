@@ -19,9 +19,8 @@ python3 train_student.py --path-t ./save/models/resnet56_vanilla/ckpt_epoch_240.
         --model_s resnet20 -r 0.1 -a 0.9 -b 0 --kd_T 4 \
         --batch_size 64 --learning_rate 0.05 \
         --have_mlp 1 --mlp_name 'global'\
-        --t_start 1 --t_end 20 --cosine_decay 1 \
-        --decay_max 0 --decay_min -1 --decay_loops 10 \
+        --cosine_decay 1 --decay_max 0 --decay_min -1 --decay_loops 10 \
         --save_model \
-        --experiments_dir 'tea-res56-stu-res20/dkd/global_T/your_experiment_name' \
+        --experiments_dir 'tea-res56-stu-res20/kd/global_T/your_experiment_name' \
         --experiments_name 'fold-1'
         
