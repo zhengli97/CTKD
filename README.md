@@ -80,10 +80,8 @@ After the training process, put your teacher model to `./save/models`.
 We provide complete training configs, logs, and models for your reference.
 
 CIFAR-100:
-- Combing CTKD with vanilla KD:  
-[Baidu Yun] [Google]
 
-- Combing CTKD with other KD methods, including PKT, SP, VID, CRD, SRRL, and DKD.  
+- Combing CTKD with existing KD methods, including vanilla KD, PKT, SP, VID, CRD, SRRL, and DKD.  
 (Teacher: RN-56, Student: RN-20)  
 [[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [[Google]](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)
 
