@@ -53,8 +53,8 @@ On ImageNet-2012:
 
 |  Dataset | Download |
 |:---------------:|:-----------------:|
-| CIFAR teacher models   | [[Baidu Yun]](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)  [Google] |
-| ImageNet teacher models  | [[Baidu Yun]](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)  [Google] |
+| CIFAR teacher models   | [[Baidu Yun]](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)   |
+| ImageNet teacher models  | [[Baidu Yun]](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)   |
 
 If you want to train your teacher model, please consider using `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
 
@@ -105,3 +105,4 @@ If this repo is helpful for your research, please consider citing our paper:
 }
 ```
 
+For any questions, please contact me via email (zhengli97@mail.nankai.edu.cn).

@@ -11,7 +11,6 @@ from .ShuffleNetv2_Imagenet import shufflenet_v2_x0_5
 from .ShuffleNetv2_Imagenet import shufflenet_v2_x1_0 as ShuffleNetV2Imagenet
 from .ShuffleNetv2_Imagenet import shufflenet_v2_x2_0
 from .temp_global import Global_T
-from .temp_mlp import Temp_MLP1
 from .vgg import vgg8_bn, vgg11_bn, vgg13_bn, vgg16_bn, vgg19_bn
 from .vggv2 import vgg11_bn as vgg11_imagenet
 from .vggv2 import vgg13_bn as vgg13_imagenet
