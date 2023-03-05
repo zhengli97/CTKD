@@ -87,13 +87,6 @@ CIFAR-100:
 (Teacher: RN-56, Student: RN-20)  
 [[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [[Google]](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)
 
-ImageNet-2012:
-- Combing CTKD with vanilla KD:  
-[Baidu Yun] [Google]
-
-
-This repo is not finished yet, I will keep updating the content.
-
 ## Citation
 
 If this repo is helpful for your research, please consider citing our paper:
