@@ -425,7 +425,6 @@ def main_worker(gpu, ngpus_per_node, opt):
             reduced = reduce_tensor(metrics, opt.world_size if 'world_size' in opt else 1)
             train_acc, train_acc_top5, train_loss = reduced.tolist()
 
-
         return_pack = validate(val_loader, model_s, criterion_cls, opt)        
         test_acc, test_acc_top5, _ = return_pack
 

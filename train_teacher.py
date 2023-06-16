@@ -29,7 +29,7 @@ def parse_option():
     parser.add_argument('--batch_size', type=int, default=64, help='batch_size')
     parser.add_argument('--num_workers', type=int, default=8, help='num of workers to use')
     parser.add_argument('--epochs', type=int, default=240, help='number of training epochs')
-    parser.add_argument('--gpu_id', type=str, default='0,1,2,3,4,5,6,7', help='id(s) for CUDA_VISIBLE_DEVICES')
+    parser.add_argument('--gpu_id', type=str, default='0', help='id(s) for CUDA_VISIBLE_DEVICES')
     
     parser.add_argument('--experiments_dir', type=str, default='models',help='Directory name to save the model, log, config')
     parser.add_argument('--experiments_name', type=str, default='baseline')
@@ -48,8 +48,6 @@ def parse_option():
                                  'vgg8', 'vgg11', 'vgg13', 'vgg16', 'vgg19',
                                  'MobileNetV2', 'ShuffleV1', 'ShuffleV2','ResNet50' ])
     parser.add_argument('--dataset', type=str, default='cifar100', choices=['cifar100', 'imagenet', 'imagenette'], help='dataset')
-    
-    parser.add_argument('--use-lmdb', action='store_true') # default=false
 
     # multiprocessing
     parser.add_argument('--multiprocessing-distributed', action='store_true',
@@ -76,9 +74,6 @@ def parse_option():
         opt.lr_decay_epochs.append(int(it))
 
     opt.model_name =  os.path.join(opt.experiments_dir, opt.experiments_name)
-
-    if opt.dali is not None:
-        opt.model_name += '_dali:' + opt.dali
 
     opt.save_folder = os.path.join(opt.model_path, opt.model_name)
     if not os.path.isdir(opt.save_folder):
@@ -154,8 +149,6 @@ def main_worker(gpu, ngpus_per_node, opt):
                 # ourselves based on the total number of GPUs we have
                 opt.batch_size = int(opt.batch_size / ngpus_per_node)
                 opt.num_workers = int((opt.num_workers + ngpus_per_node - 1) / ngpus_per_node)
-                # DDP = torch.nn.parallel.DistributedDataParallel if opt.dali is None else apex.parallel.DistributedDataParallel
-                # model = DDP(model, delay_allreduce=True)
                 DDP = torch.nn.parallel.DistributedDataParallel
                 model = DDP(model, device_ids=[opt.gpu])
             else:
@@ -188,10 +181,8 @@ def main_worker(gpu, ngpus_per_node, opt):
     # routine
     for epoch in range(1, opt.epochs + 1):
         if opt.multiprocessing_distributed:
-            if opt.dali is None:
-                train_sampler.set_epoch(epoch)
-            # No test_sampler because epoch is random seed, not needed in sequential testing.
-
+            train_sampler.set_epoch(epoch)
+        
         adjust_learning_rate(epoch, opt, optimizer)
         print("==> training...")
 

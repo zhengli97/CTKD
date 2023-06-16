@@ -246,4 +246,15 @@ def validate(val_loader, model, criterion, opt):
                         idx, n_batch, opt.gpu, loss=losses,
                         top1=top1, top5=top5))
     
+    if opt.multiprocessing_distributed:
+        # Batch size may not be equal across multiple gpus
+        total_metrics = torch.tensor([top1.sum, top5.sum, losses.sum]).to(opt.gpu)
+        count_metrics = torch.tensor([top1.count, top5.count, losses.count]).to(opt.gpu)
+        total_metrics = reduce_tensor(total_metrics, 1) # here world_size=1, because they should be summed up
+        count_metrics = reduce_tensor(count_metrics, 1)
+        ret = []
+        for s, n in zip(total_metrics.tolist(), count_metrics.tolist()):
+            ret.append(s / (1.0 * n))
+        return ret
+
     return [top1.avg, top5.avg, losses.avg]
