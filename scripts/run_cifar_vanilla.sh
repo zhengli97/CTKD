@@ -7,4 +7,4 @@ python3 train_teacher.py --model resnet56 \
                 --lr_decay_epochs '150,180,210' \
                 --lr_decay_rate 0.1 \
                 --experiments_dir 'baseline/resnet56' \
-                --experiments_name 'fold-1' \
+                --experiments_name 'fold-1'

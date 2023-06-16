@@ -64,9 +64,8 @@ def parse_option():
     if opt.model in ['MobileNetV2', 'ShuffleV1', 'ShuffleV2']:
         opt.learning_rate = 0.01
 
-    # set the path of model and tensorboard 
+    # set the path of model
     opt.model_path = './save/models'
-    # opt.tb_path = './save/tensorboard'
 
     iterations = opt.lr_decay_epochs.split(',')
     opt.lr_decay_epochs = list([])
@@ -126,7 +125,7 @@ def main_worker(gpu, ngpus_per_node, opt):
         'imagenette': 10,
     }.get(opt.dataset, None)
     
-    model = model_dict[opt.model](num_classes=n_cls, feat_drop_ratio=opt.feat_drop_ratio)
+    model = model_dict[opt.model](num_classes=n_cls)
 
     # optimizer
     optimizer = optim.SGD(model.parameters(),
@@ -157,7 +156,6 @@ def main_worker(gpu, ngpus_per_node, opt):
             criterion = criterion.cuda()
             if torch.cuda.device_count() > 1:
                 model = nn.DataParallel(model, device_ids=opt.gpu_id).cuda()
-                # model = nn.DataParallel(model).cuda()
             else:
                 model = model.cuda()
 
@@ -173,10 +171,6 @@ def main_worker(gpu, ngpus_per_node, opt):
                     multiprocessing_distributed=opt.multiprocessing_distributed)
     else:
         raise NotImplementedError(opt.dataset)
-
-    # tensorboard
-    # if not opt.multiprocessing_distributed or opt.rank % ngpus_per_node == 0:
-    #     logger = tb_logger.Logger(logdir=opt.tb_folder, flush_secs=2)
 
     # routine
     for epoch in range(1, opt.epochs + 1):
