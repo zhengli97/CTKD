@@ -1,8 +1,8 @@
-# CTKD
+# [AAAI 2023] Curriculum Temperature for Knowledge Distillation
 
-This repo is the official pytorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023) https://arxiv.org/abs/2211.16231
+This repo is the official PyTorch implementation for "Curriculum Temperature for Knowledge Distillation" https://arxiv.org/abs/2211.16231
 
-Detailed chinese interpretation is available on a chinese forum ZhiHu: https://zhuanlan.zhihu.com/p/595735843.
+Detailed Chinese interpretation is available on a Chinese forum Zhihu: https://zhuanlan.zhihu.com/p/595735843.
 
 ### Abstract
 
