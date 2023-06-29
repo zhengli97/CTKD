@@ -1,6 +1,6 @@
-# [AAAI 2023] Curriculum Temperature for Knowledge Distillation
+# Curriculum Temperature for Knowledge Distillation
 
-This repo is the official PyTorch implementation for "Curriculum Temperature for Knowledge Distillation" https://arxiv.org/abs/2211.16231
+This repo is the official PyTorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023) https://arxiv.org/abs/2211.16231
 
 Detailed Chinese interpretation is available on a Chinese forum Zhihu: https://zhuanlan.zhihu.com/p/595735843.
 
