@@ -92,11 +92,14 @@ CIFAR-100:
 If this repo is helpful for your research, please consider citing our paper:
 
 ```
-@article{li2022curriculum,
-  title={Curriculum Temperature for Knowledge Distillation},
+@inproceedings{li2023curriculum,
+  title={Curriculum temperature for knowledge distillation},
   author={Li, Zheng and Li, Xiang and Yang, Lingfeng and Zhao, Borui and Song, Renjie and Luo, Lei and Li, Jun and Yang, Jian},
-  journal={arXiv preprint arXiv:2211.16231},
-  year={2022}
+  booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
+  volume={37},
+  number={2},
+  pages={1504--1512},
+  year={2023}
 }
 ```
 
