@@ -55,8 +55,8 @@ On ImageNet-2012:
 
 |  Dataset | Download |
 |:---------------:|:-----------------:|
-| CIFAR teacher models   | [[Baidu Yun]](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)   |
-| ImageNet teacher models  | [[Baidu Yun]](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)   |
+| CIFAR teacher models   | [[Baidu Cloud](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)]   |
+| ImageNet teacher models  | [[Baidu Cloud](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)]   |
 
 If you want to train your teacher model, please consider using `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
 
@@ -85,11 +85,25 @@ CIFAR-100:
 
 - Combing CTKD with existing KD methods, including vanilla KD, PKT, SP, VID, CRD, SRRL, and DKD.  
 (Teacher: RN-56, Student: RN-20)  
-[[Baidu Yun]](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy) [[Google]](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)
+[[Baidu Cloud](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy)] [[Google](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)]
+
+## Instance-wise Temperature
+
+The detailed implementation and training log of instance-wise CTKD are provided for your reference.
+[[Baidu Cloud](https://pan.baidu.com/s/1SG0dCLjTATIOOy2-2JFCbA?pwd=inx5)][[Google Drive](https://drive.google.com/drive/folders/12rgry4kXCmublAonPjTHfhhxE51zmF4Q?usp=sharing)]
+
+In this case, you need to simply change the distillation loss calculation process in the `distiller_zoo/KD.py line16-line18` as follows:
+```
+KD_loss = 0
+for i in range(T.shape[0]):
+   KD_loss += KL_Loss(y_s[i], y_t[i], T[i])
+KD_loss /= T.shape[0]
+```
+
 
 ## Citation
 
-If this repo is helpful for your research, please consider citing our paper:
+If this repo is helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you!
 
 ```
 @inproceedings{li2023curriculum,
