@@ -89,7 +89,7 @@ CIFAR-100:
 
 ## Instance-wise Temperature
 
-The detailed implementation and training log of instance-wise CTKD are provided for your reference.
+The detailed implementation and training log of instance-wise CTKD are provided for your reference.  
 [[Baidu Cloud](https://pan.baidu.com/s/1SG0dCLjTATIOOy2-2JFCbA?pwd=inx5)][[Google Drive](https://drive.google.com/drive/folders/12rgry4kXCmublAonPjTHfhhxE51zmF4Q?usp=sharing)]
 
 In this case, you need to simply change the distillation loss calculation process in the `distiller_zoo/KD.py line16-line18` as follows:
@@ -103,7 +103,7 @@ KD_loss /= T.shape[0]
 
 ## Citation
 
-If this repo is helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you!
+If this repo is helpful for your research, please consider citing our paper and giving this repo a star ⭐.
 
 ```
 @inproceedings{li2023curriculum,
