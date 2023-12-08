@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+
+
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>CTKD中文解读</title>
+  <link rel="icon" type="image/x-icon" href="None">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
+
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <script src="static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">Curriculum Temperature for <br> Knowledge Distillation </h1>
+          <div class="is-size-3 content">
+            中文解读
+          </div>
+          <p class="is-size-5">李政 南开大学</p>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-4">一句话概括:</h2>
+        <div class="content has-text-justified">
+          <p>
+            相对于静态温度超参蒸馏，本文提出了简单且高效的动态温度超参蒸馏新方法。
+          </p>
+          <h2 class="title is-3">背景问题：</h2>
+          <p>目前已有的蒸馏方法中，都会采用带有温度超参的KL Divergence Loss进行计算，从而在教师模型和学生模型之间进行蒸馏，公式如下：
+            <br>
+            <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>L</mi><mrow><mi>k</mi><mi>d</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>q</mi><mrow><mi>t</mi></mrow></msup><mo>,</mo><msup><mi>q</mi><mrow><mi>s</mi></mrow></msup><mo>,</mo><mi>τ</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>I</mi></mrow></munderover><msup><mi>τ</mi><mrow><mn>2</mn></mrow></msup><mi>K</mi><mi>L</mi><mo stretchy="false">(</mo><mi>σ</mi><mo stretchy="false">(</mo><msubsup><mi>q</mi><mrow><mi>i</mi></mrow><mrow><mi>t</mi></mrow></msubsup><mrow><mo>/</mo></mrow><mi>τ</mi><mo stretchy="false">)</mo><mo>,</mo><mi>σ</mi><mo stretchy="false">(</mo><msubsup><mi>q</mi><mrow><mi>i</mi></mrow><mrow><mi>s</mi></mrow></msubsup><mrow><mo>/</mo></mrow><mi>τ</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo></mo></math>
+          </p>
+          其中，温度超参的大小控制了两个预测结果和的平滑程度，决定了两个概率分布间的距离，τ越大(τ > 1)，就会使得概率分布越平滑(soft)，
+          τ越小(0 < τ< 1)，越接近0，会使得概率分布越尖锐(sharp)。
+          <p>
+          <p>
+            τ的大小影响着蒸馏中学生模型学习的难度，不同的τ会产生不同的蒸馏结果。
+            而现有工作普遍的方式都是采用固定的温度超参，一般会设定成4。</p>
+          <p>
+            那么这就带来了两个问题：
+            <p>
+            1.不同的教师学生模型在KD过程中最优超参不一定是4。如果要找到这个最佳超参，需要进行暴力搜索，会带来大量的计算，整个过程非常低效。
+            <p>
+            2.一直保持静态固定的温度超参对学生模型来说不是最优的。基于课程学习的思想，人类在学习过程中都是由简单到困难的学习知识。那么在蒸馏的过程中，我们也会希望模型一开始蒸馏是让学生容易学习的，然后难度再增加。难度是一直动态变化的。
+            <p>
+            于是一个自然而然的想法就冒了出来：
+            <p>
+            在蒸馏任务里，能不能让网络自己学习一个适合的动态温度超参进行蒸馏，并且参考课程学习，形成一个蒸馏难度由易到难的情况？
+            <p>
+            于是我们就提出了CTKD来实现这个想法。
+        </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+        <h2 class="title is-3">方法：</h2>
+        <p>
+        既然温度超参τ可以在蒸馏里决定两个分布之间的KL散度，进而影响模型的学习，那我们就可以通过让网络自动学习一个合适的τ来达到以上的目的。
+        <p>
+        于是以上具体问题就直接可以转化成以下的 <strong>核心思想</strong> ：
+        <p>
+        在蒸馏过程里，学生网络被训练去最小化KL loss的情况下，τ作为一个可学习的参数，要被训练去最大化KL loss，从而发挥对抗(Adversarial)的作用，增加训练的难度。随着训练的进行，对抗的作用要不断增加，达到课程学习的效果。
+        <p>
+        以上的实现可以直接利用一个非常简单的操作：利用梯度反向层GRL (Gradient Reversal Layer)来去反向可学习超参τ的梯度，就可以非常直接达到对抗的效果，同时随着训练的进行，不断增加反向梯度的权重λ，进而增加学习的难度。
+        <p>
+        CTKD的论文的结构图如下：
+        <p>
+          <figure>
+            <img src="static/images/framework.png" alt="图挂了= =">
+            <figcaption>图1. CTKD结构图。(a) 对抗温度超参的训练流程，(b)由易到难的课程训练方法。</figcaption>
+          </figure>
+        </p>
+        <p>
+        <strong>CTKD方法可以简单分为左右两个部分：</strong>
+        <p>
+        <strong>1. 对抗温度超参τ的学习部分。</strong>
+        <p>
+        这里只包含两个小模块，一个是梯度反向层GRL，用于反向经过温度超参τ的梯度，另一个是可学习超参温度τ。
+        <p>
+        其中对于温度超参τ，有两种实现方式:
+        <figure>
+          <img src="static/images/global_instance_temp.jpg" alt="图挂了= =" width="90%">
+          <figcaption>图2. 两种不同的可学习温度模块。(a)全局温度法，(b)实例级温度法。</figcaption>
+        </figure>
+        <p>
+        第一种是全局方案 (Global Temperature)，只会产生一个τ，代码实现非常简单，就一句话：
+        <p>
+        <code>
+          self.global_T = nn.Parameter(torch.ones(1), requires_grad=True)
+        </code>
+        <p>
+        第二种是实例级别方案(Instance-wise Temperature)，即对每个单独的样本都产生一个τ，也就是对于一个batch中，如果有128个样本，那么就instance-wise CTKD就会生成对应128个τ。代码实现也很简单，就是两层1x1 conv组成的MLP，最后输出128的值。
+        <p>
+        <strong>2. 难度逐渐增加的课程学习部分。</strong>
+        <p>
+        随着训练的进行，不断增加GRL的权重λ，达到增加学习难度的效果，参考图2.(b)中所画。
+        <p>
+        在论文的实现里，我们直接采用Cos的方式，让反向权重λ从0增加到1。
+        <p>
+        以上就是CTKD的全部实现，非常的简单有效。
+        <p>
+        总结一下方法：CTKD总共包含两个模块，梯度反向层GRL和温度预测模块，
+        <p>
+        CTKD方法可以作为即插即用的插件应用在现有的SOTA的蒸馏方法中，取得广泛的提升。
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+        <h2 class="title is-3">实验结果：</h2>
+        <p>
+          我们在三个数据集：CIFAR-100，ImageNet和MS-COCO上验证了CTKD方法的性能。在CIFAR 100数据集上, CTKD的实验结果如下所示：
+        <p>
+          <figure>
+            <img src="static/images/cifar_acc.jpg" alt="图挂啦" width="100%">
+            <figcaption>图3. 在CIFAR-100上的准确率。</figcaption>
+          </figure>
+        <p>
+          作为一个即插即用的插件，应用在已有的SOTA方法上:
+        <p>
+          <figure>
+            <img src="static/images/cifar_plug_acc.jpg" alt="图挂啦" width="100%">
+            <figcaption>图4. CTKD作为插件应用在不同的方法上。</figcaption>
+          </figure>
+        <p>
+          在ImageNet上的实验：
+          <figure>
+            <img src="static/images/imagenet_acc.jpg" alt="图挂啦" width="90%">
+            <figcaption>图5. 在ImageNet上的准确率。</figcaption>
+          </figure>
+        <p>
+          温度超参的整体学习过程可视化：
+        <p>
+          <figure>
+            <img src="static/images/temp_curve.png" alt="Temperature Curve" width="100%">
+            <figcaption>图6. 温度的在训练中的变化过程。</figcaption>
+          </figure>
+        <p>
+          由以上图可以看到，CTKD整体的动态学习τ的过程。
+        <p>
+          将CTKD应用在多种现有的蒸馏方案上，可以取得广泛的提升效果。
+        <p>
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <div class="content has-text-justified">
+        <p>
+        <h2 class="title is-3">问题反馈与解答：</h2>
+        <p>
+        <strong>1. 问：代码实现的λ与论文中公式11表述不一致。</strong>
+        <p>
+        答：论文里面表述写的是对反向梯度层的lambda从0按照cos的方式增加到1，
+        <p>
+        在实现的代码中，scripts/run_cifar_distill.sh里面的超参设定是--decay_max 0 --decay_min -1.
+        <p>
+        这里表达的意思是，对梯度相乘的超参从0下降到-1，达到反向梯度效果.
+        <p>
+        论文里面的公式11比代码实现公式多了一个π。以前学过三角函数的公式cos(π+x)=-cosx。
+        <p> 
+        所以在这里，两个的效果是等价的。
+        <p>
+        <strong>2. 问：把GRL用在别的方法上去学习超参不work，第一轮之后直接max。</strong>
+        <p>
+        答：在应用GRL的时候，需要考虑方法本身是否存在约束，GRL发挥的是adversarial对抗的作用，没有约束就会直接朝着反向最大化优化下去。
+        <p>
+        在KD loss的优化中是存在约束的，在KD loss里面T^2* KLD 这里，T^2的最大化会让KLD loss里面的T变大，使教师和学生的分布都变平滑，从而使KLD loss整体减小。也就是说，T变大，KLD loss就会变小，反之亦然，从而整体的KD loss能够保持在一个合理范围。这两个是存在动态约束的。
+        <p>
+        如果要学习的超参没有约束，没有对抗的效果在里面。在反向最大化整体的loss的时候，就可能会让超参直接学习到设置的范围上界。
+        <p>
+        所以直接应用GRL需谨慎，要根据具体任务来。
+        <p>
+        另外的一个可能存在的原因是，GRL的对抗幅度过强，一次优化就会产生很大的梯度，学习温度模块没办法学会，这时候可以尝试去降低GRL的权重λ，改成一个很小的值，让温度模块慢慢训。
+        <p>
+        <strong>3. 问：CTKD工作历程以及motivation。</strong>
+        <p>
+        答：一开始的工作启发是来自于< Meta Knowledge Distillation >这篇工作。这篇工作的方式是一个温度参数模块预测的温度超参T，方式是在额外划分的验证集上最小化KL loss。
+        <p>
+        MKD工作存在的问题是，1. 需要额外划分验证集，不是那种拿到code就可以直接训练的方法。2.方法应用的条件下是heavy aug，而普通的蒸馏训练是不用heavy aug的，MKD难以作为插件集成进现有主流的kd方法里。3.没开源代码，不易复现。
+        <p>
+        CTKD工作受到MKD工作的启发，也在思考可不可以有另外一种方式去学习。第一种非常直觉性的探索方式就是，给定单个可学习的超参T，探索直接最小化KL loss的方向的，也就是没有GRL的情况。
+        <p>
+        这一部分的实验下来，发现T无法收敛，会保持在范围的上边界。比如范围是[1,21]的话，就会在20.0+的这种状态，显然是无效的。
+        <p>
+        于是我们直接对一些model pair不同T下acc和total KL loss的统计，发现对应acc更好的T所有样本的KL loss加在一起不是想象中的是acc最好的时候KL loss就是最低。而是KL loss相对更大时候，acc反而会更好。
+        <p>
+        这样的方式也就好理解了，KL loss越大，侧面反应蒸馏难度高的时候kd效果往往会更好。
+        <p>
+        于是，CTKD就走了一个与MKD相反的方向。MKD在最小化KD loss，CTKD的目标是最大化KD loss。要达到对抗效果的非常简单的方法就是GRL。于是就有了GRL这种反向思路出现。
+        </p>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column">
+        <div class="content has-text-justified">
+        <h2 class="title">以上为全部内容解读</h2>
+        <!-- 如果还有问题，欢迎通过邮箱联系: zhengli97[at]nankai.edu.cn -->
+      </pre>
+      </div>
+    </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>
