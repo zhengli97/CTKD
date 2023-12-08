@@ -121,6 +121,14 @@
                     </span>
                     <span>中文解读</span>
                 </a>
+                <br><br><br>
+                <figure width="20%">
+                  <img src="static/images/framework.png" alt="fail" width="90%"">
+                  <figcaption >Fig.1 (a) We introduce a
+                    learnable temperature module that predicts a suitable temperature τ for distillation. The gradient reversal layer is proposed
+                    to reverse the gradient of the temperature module during the backpropagation. (b) Following the easy-to-hard curriculum, we
+                    gradually increase the parameter λ, leading to increased learning difficulty w.r.t. temperature for the student.</figcaption>
+                </figure>
               </span>
             </div>
           </div>
@@ -131,7 +139,6 @@
 </section>
 
 
-<!-- Paper abstract -->
 <section class="section hero is-light">
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
@@ -139,13 +146,20 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
+            Most existing distillation methods ignore the flexible role of
+            the temperature in the loss function and fix it as a hyperparameter that can be decided by an
+            inefficient grid search.
+            In general, the tempera-ture controls the discrepancy between
+            two distributions and can faithfully determine the difficulty level of the distillation task. 
+            Keeping a constant temperature, i.e., a fixed level of task difficulty, is usually suboptimal for a
+            growing student during its progressive learning stages.
             In this paper, we propose a simple curriculum-based technique, termed Curriculum 
-            Temperature for Knowledge Distillation (CTKD), which controls the task difficulty level during 
+            Temperature for Knowledge Disti-llation (CTKD), which controls the task difficulty level during 
             the student's learning career through a dynamic and learnable temperature. 
-            Specifically, following an easy-to-hard curricu-lum, we gradually increase the distillation 
-            loss w.r.t. the temperature, leading to increased distillation difficulty in an adversarial manner. 
-            As an easy-to-use plug-in technique, CTKD can be seamlessly inte-grated into existing knowledge 
-            distillation frameworks and brings general improvements at a negli-gible additional computation cost. 
+            Specifically, following an easy-to-hard curriculum, we gradually increase the distillation 
+            loss w.r.t. the temperature, leading to increased distillation difficulty in an adv-ersarial manner. 
+            As an easy-to-use plug-in technique, CTKD can be seamlessly integrated into existing knowledge 
+            distillation frameworks and brings general improvements at a negligible additional comp-utation cost. 
           </p>
         </div>
       </div>
@@ -159,46 +173,55 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
+        <h2 class="title is-3">Contributions</h2>
         <div class="content has-text-justified">
-        <img src="static/images/framework.png" alt="">
+          <p>
+            1. We propose to adversarially learn a dynamic temperature hyperparameter during the student’s 
+            training process
+            with a reversed gradient that aims to maximize the distillation loss between teacher and student.
+          </p>
+          <P>
+            2. We introduce simple and effective curricula which organize the distillation task from 
+            easy to hard through a dynamic and learnable temperature parameter.
+          </P>
+          <P>
+            3. Extensive experiment results demonstrate that CTKD is
+            a simple yet effective plug-in technique, which consistently improves existing state-of-the-art 
+            distillation approaches with a substantial margin on CIFAR-100 and ImageNet.
+          </P>
+        </div>
       </div>
-    </div>
     </div>
   </div>
 </section>
 
 
-<!-- Paper poster -->
-<!-- <section class="hero is-small is-light">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title">Poster</h2>
-
-      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">
-          </iframe>
-        
+<section class="section hero is-light">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Method</h2>
+        <div class="content has-text-justified">
+          <p>
+            In this paper,  we propose to adversarially learn a dynamic temperature module that predicts a 
+            suit-able temperature value τ for the current training. The temperature module is optimized in the
+            oppo-site direction of the student, intending to maximize the distillation loss between the student and tea-cher.
+            Inspired by curriculum learning, we further introduce a simple and effective curriculum which organizes the 
+            distillation task from easy to hard via directly scaling the distillation loss by magnitude w.r.t. the temperature.
+            Two versions of the learnable temperature module are used in our approach, namely Global-T and Instance-T,
+             which respectively generate different forms of temperature for the current training, as shown in Fig.2. 
+          </p>
+          <figure>
+            <img src="static/images/global_instance_temp.jpg" alt="fail">
+            <figcaption>Fig.2 The illustrations of global and instance-wise temperature modules. B denotes the batch size,
+             C denotes the number of classes. τ is the output temperature.</figcaption>
+          </figure>
+        </div>
       </div>
     </div>
-  </section> -->
-<!--End paper poster -->
-
-
-<!--BibTex citation -->
-  <section class="section" id="BibTeX">
-    <div class="container is-max-desktop content">
-      <h2 class="title">BibTeX</h2>
-      <pre><code>@inproceedings{li2023curriculum,
-        title={Curriculum temperature for knowledge distillation},
-        author={Li, Zheng and Li, Xiang and Yang, Lingfeng and Zhao, Borui and Song, Renjie and Luo, Lei and Li, Jun and Yang, Jian},
-        booktitle={Proceedings of the AAAI Conference on Artificial Intelligence},
-        volume={37},
-        number={2},
-        pages={1504--1512},
-        year={2023}
-      }</code></pre>
-    </div>
+  </div>
 </section>
-<!--End BibTex citation -->
+
 
 <footer class="footer">
 <div class="container is-small">
