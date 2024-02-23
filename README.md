@@ -99,7 +99,7 @@ for i in range(T.shape[0]):
    KD_loss += KL_Loss(y_s[i], y_t[i], T[i])
 KD_loss /= T.shape[0]
 ```
-
+KL_Loss() is defined as follows:
 ```
 def KL_Loss(output_batch, teacher_outputs, T):
 
