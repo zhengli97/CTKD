@@ -100,6 +100,19 @@ for i in range(T.shape[0]):
 KD_loss /= T.shape[0]
 ```
 
+```
+def KL_Loss(output_batch, teacher_outputs, T):
+
+    output_batch = output_batch.unsqueeze(0)
+    teacher_outputs = teacher_outputs.unsqueeze(0)
+
+    output_batch = F.log_softmax(output_batch / T, dim=1)
+    teacher_outputs = F.softmax(teacher_outputs / T, dim=1) + 10 ** (-7)
+
+    loss = T * T * torch.sum(torch.mul(teacher_outputs, torch.log(teacher_outputs) - output_batch))
+    return loss
+```
+
 
 ## Citation
 
