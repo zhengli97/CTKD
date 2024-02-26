@@ -81,7 +81,7 @@
             <math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><msub><mi>L</mi><mrow><mi>k</mi><mi>d</mi></mrow></msub><mo stretchy="false">(</mo><msup><mi>q</mi><mrow><mi>t</mi></mrow></msup><mo>,</mo><msup><mi>q</mi><mrow><mi>s</mi></mrow></msup><mo>,</mo><mi>τ</mi><mo stretchy="false">)</mo><mo>=</mo><munderover><mo data-mjx-texclass="OP">∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>I</mi></mrow></munderover><msup><mi>τ</mi><mrow><mn>2</mn></mrow></msup><mi>K</mi><mi>L</mi><mo stretchy="false">(</mo><mi>σ</mi><mo stretchy="false">(</mo><msubsup><mi>q</mi><mrow><mi>i</mi></mrow><mrow><mi>t</mi></mrow></msubsup><mrow><mo>/</mo></mrow><mi>τ</mi><mo stretchy="false">)</mo><mo>,</mo><mi>σ</mi><mo stretchy="false">(</mo><msubsup><mi>q</mi><mrow><mi>i</mi></mrow><mrow><mi>s</mi></mrow></msubsup><mrow><mo>/</mo></mrow><mi>τ</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><mo></mo></math>
           </p>
           其中，温度超参的大小控制了两个预测结果和的平滑程度，决定了两个概率分布间的距离，τ越大(τ > 1)，就会使得概率分布越平滑(soft)，
-          τ越小(0 < τ< 1)，越接近0，会使得概率分布越尖锐(sharp)。
+          τ越小(0 < τ < 1)，越接近0，会使得概率分布越尖锐(sharp)。
           <p>
           <p>
             τ的大小影响着蒸馏中学生模型学习的难度，不同的τ会产生不同的蒸馏结果。
@@ -115,17 +115,17 @@
         <p>
         既然温度超参τ可以在蒸馏里决定两个分布之间的KL散度，进而影响模型的学习，那我们就可以通过让网络自动学习一个合适的τ来达到以上的目的。
         <p>
-        于是以上具体问题就直接可以转化成以下的 <strong>核心思想</strong> ：
+        于是以上具体问题就直接可以转化成以下的<strong>核心思想</strong>：
         <p>
-        在蒸馏过程里，学生网络被训练去最小化KL loss的情况下，τ作为一个可学习的参数，要被训练去最大化KL loss，从而发挥对抗(Adversarial)的作用，增加训练的难度。随着训练的进行，对抗的作用要不断增加，达到课程学习的效果。
+        在蒸馏过程里，学生网络被训练去最小化KL loss的情况下，τ作为一个可学习的参数，要被训练去最大化KL-loss，从而发挥对抗(Adversarial)的作用，增加训练的难度。随着训练的进行，对抗的作用要不断增加，达到课程学习的效果。
         <p>
-        以上的实现可以直接利用一个非常简单的操作：利用梯度反向层GRL (Gradient Reversal Layer)来去反向可学习超参τ的梯度，就可以非常直接达到对抗的效果，同时随着训练的进行，不断增加反向梯度的权重λ，进而增加学习的难度。
+        以上的实现可以直接利用一个非常简单的操作：利用梯度反向层GRL(Gradient Reversal Layer)来去反向可学习超参τ的梯度，就可以非常直接达到对抗的效果，同时随着训练的进行，不断增加反向梯度的权重λ，进而增加学习的难度。
         <p>
         CTKD的论文的结构图如下：
         <p>
           <figure>
             <img src="static/images/framework.png" alt="图挂了= =">
-            <figcaption>图1. CTKD结构图。(a) 对抗温度超参的训练流程，(b)由易到难的课程训练方法。</figcaption>
+            <figcaption>图1. CTKD结构图。(a)对抗温度超参的训练流程，(b)由易到难的课程训练方法。</figcaption>
           </figure>
         </p>
         <p>
@@ -141,19 +141,21 @@
           <figcaption>图2. 两种不同的可学习温度模块。(a)全局温度法，(b)实例级温度法。</figcaption>
         </figure>
         <p>
-        第一种是全局方案 (Global Temperature)，只会产生一个τ，代码实现非常简单，就一句话：
+        第一种是全局方案(Global Temperature)，对于全局只会产生一个τ，代码实现非常简单，就一句话：
         <p>
         <code>
           self.global_T = nn.Parameter(torch.ones(1), requires_grad=True)
         </code>
         <p>
-        第二种是实例级别方案(Instance-wise Temperature)，即对每个单独的样本都产生一个τ，也就是对于一个batch中，如果有128个样本，那么就instance-wise CTKD就会生成对应128个τ。代码实现也很简单，就是两层1x1 conv组成的MLP，最后输出128的值。
+        第二种是实例级别方案(Instance-wise Temperature)，即对每个单独的样本都产生一个τ，也就是对于一个batch中，如果有128个样本，那么就instance-wise CTKD就会生成对应128个τ。代码实现也很简单，就是两层1x1 conv组成的MLP，将教师和学生的输出concat在一起，送入MLP里面，最后输出128个温度值。
+        <p>
+        <p>Instance-wise Temp的代码实现已经训练log都已经在GitHub里面提供，<a href="https://github.com/zhengli97/CTKD?tab=readme-ov-file#instance-wise-temperature">在这里</a>。</p>
         <p>
         <strong>2. 难度逐渐增加的课程学习部分。</strong>
         <p>
-        随着训练的进行，不断增加GRL的权重λ，达到增加学习难度的效果，参考图2.(b)中所画。
+        随着训练的进行，不断增加GRL的权重λ，达到增加学习难度的效果，参考图1.(b)中所画。
         <p>
-        在论文的实现里，我们直接采用Cos的方式，让反向权重λ从0增加到1。
+        在论文的实现里，我们直接采用Cosine的方式，让反向权重λ从0增加到1。
         <p>
         以上就是CTKD的全部实现，非常的简单有效。
         <p>
@@ -179,30 +181,30 @@
         <p>
           <figure>
             <img src="static/images/cifar_acc.jpg" alt="图挂啦" width="100%">
-            <figcaption>图3. 在CIFAR-100上的准确率。</figcaption>
+            <figcaption>表1. 在CIFAR-100上的准确率。</figcaption>
           </figure>
         <p>
           作为一个即插即用的插件，应用在已有的SOTA方法上:
         <p>
           <figure>
             <img src="static/images/cifar_plug_acc.jpg" alt="图挂啦" width="100%">
-            <figcaption>图4. CTKD作为插件应用在不同的方法上。</figcaption>
+            <figcaption>表2. CTKD作为插件应用在不同的方法上。</figcaption>
           </figure>
         <p>
           在ImageNet上的实验：
           <figure>
             <img src="static/images/imagenet_acc.jpg" alt="图挂啦" width="90%">
-            <figcaption>图5. 在ImageNet上的准确率。</figcaption>
+            <figcaption>表3. 在ImageNet上的准确率。</figcaption>
           </figure>
         <p>
           温度超参的整体学习过程可视化：
         <p>
           <figure>
             <img src="static/images/temp_curve.png" alt="Temperature Curve" width="100%">
-            <figcaption>图6. 温度的在训练中的变化过程。</figcaption>
+            <figcaption>图3. 温度参数值在训练中的变化过程。</figcaption>
           </figure>
         <p>
-          由以上图可以看到，CTKD整体的动态学习τ的过程。
+          由以上图可以看到，CTKD整体的动态学习τ的过程。随着训练的进行，最后收敛并且稳定下来。对于不同的teacher-student pair有不同的最终收敛值。
         <p>
           将CTKD应用在多种现有的蒸馏方案上，可以取得广泛的提升效果。
         <p>
@@ -231,7 +233,7 @@
         这里表达的意思是，对梯度相乘的超参从0下降到-1，达到反向梯度效果.
         <p>
         论文里面的公式11比代码实现公式多了一个π。以前学过三角函数的公式cos(π+x)=-cosx。
-        <p> 
+        <p>
         所以在这里，两个的效果是等价的。
         <p>
         <strong>2. 问：把GRL用在别的方法上去学习超参不work，第一轮之后直接max。</strong>
@@ -275,7 +277,6 @@
       <div class="column">
         <div class="content has-text-justified">
         <h2 class="title">以上为全部内容解读</h2>
-        <!-- 如果还有问题，欢迎通过邮箱联系: zhengli97[at]nankai.edu.cn -->
       </pre>
       </div>
     </div>
