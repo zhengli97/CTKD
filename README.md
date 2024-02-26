@@ -38,10 +38,10 @@ On CIFAR-100:
 
 On ImageNet-2012:
 
-|                 | Teacher <br> (RN-34) | Student <br> (RN-18) | KD | +CTKD 
-|:---------------:|:---------------:|:-----------------:|:-----------------:|:-----------------:|
-| Top-1           | 73.96   | 70.26 | 70.83 | 71.32 |
-| Top-5           | 91.58   | 89.50 | 90.31 | 90.27 |
+|                 | Teacher <br> (RN-34) | Student <br> (RN-18) | KD | +CTKD | DKD | +CTKD |
+|:---------------:|:---------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|:-----------------:|
+| Top-1           | 73.96   | 70.26 | 70.83 | 71.32 | 71.13 | 71.51 |
+| Top-5           | 91.58   | 89.50 | 90.31 | 90.27 | 90.31 | 90.47 |
 
 ## Requirements 
 
@@ -51,7 +51,7 @@ On ImageNet-2012:
 
 ## Running
 
-1. Download the pretrained teacher models and put them to `./save/models`.
+1. Download the pre-trained teacher models and put them to `./save/models`.
 
 |  Dataset | Download |
 |:---------------:|:-----------------:|
@@ -78,7 +78,7 @@ After the training process, put your teacher model to `./save/models`.
     sh scripts/run_imagenet_distill.sh  
     ```
 
-## Model Zoo
+## Model Zoo & Training Logs
 We provide complete training configs, logs, and models for your reference.
 
 CIFAR-100:
