@@ -8,7 +8,7 @@
 
 ## 💡 Note 
 
-The implementation of instance temperature has been publicly released, please check the **readme** carefully.
+The implementation of instance-wise temperature has been publicly released, please check the following **readme** carefully.
 
 ## Abstract
 
