@@ -1,10 +1,18 @@
 # Curriculum Temperature for Knowledge Distillation
 
+> [**Curriculum Temperature for Knowledge Distillation**]() <br>
+> Zheng Li, Xiang Li#, Lingfeng Yang, Borui Zhao, Renjie Song, Lei Luo, Jun Li, Jian Yang#. <br>
+> Nankai University, Nanjing University of Science and Technology, Megvii Technology. <br>
+> AAAI 2023 <br>
+> [[Paper](https://arxiv.org/abs/2211.16231)]  [[Project Page](https://zhengli97.github.io/CTKD/)] [[中文解读](https://zhengli97.github.io/CTKD/chinese_interpertation.html)]
+
 This repo is the official PyTorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023)
 
-[[Paper](https://arxiv.org/abs/2211.16231)] [[Project Page](https://zhengli97.github.io/CTKD/)] [[中文解读](https://zhengli97.github.io/CTKD/chinese_interpertation.html)]
+## 💡 Note 
 
-### Abstract
+The implementation of instance temperature has been publicly released, please check the **readme** carefully.
+
+## Abstract
 
 CTKD organizes the distillation task from easy to hard through a dynamic and learnable temperature. 
 The temperature is learned during the student’s training process with a reversed gradient that aims to maximize the distillation loss (i.e., increase the learning difficulty) between teacher and student in an adversarial manner.
