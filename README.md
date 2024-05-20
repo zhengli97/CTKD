@@ -6,8 +6,6 @@
 > AAAI 2023 <br>
 > [[Paper](https://arxiv.org/abs/2211.16231)]  [[Project Page](https://zhengli97.github.io/CTKD/)] [[中文解读](https://zhengli97.github.io/CTKD/chinese_interpertation.html)]
 
-This repo is the official PyTorch implementation for "Curriculum Temperature for Knowledge Distillation" (AAAI 2023)
-
 ## 💡 Note 
 
 The implementation of instance temperature has been publicly released, please check the **readme** carefully.
