@@ -61,8 +61,8 @@ On ImageNet-2012:
 
 |  Dataset | Download |
 |:---------------:|:-----------------:|
-| CIFAR teacher models   | [[Baidu Cloud](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)]   |
-| ImageNet teacher models  | [[Baidu Cloud](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)]   |
+| CIFAR teacher models   | [[Baidu Cloud](https://pan.baidu.com/s/1ncvsfLTQ-GdXtKY-xtaweg?pwd=meaf)] [[Github Releases](https://github.com/zhengli97/CTKD/releases/tag/pretrained-models)]   |
+| ImageNet teacher models  | [[Baidu Cloud](https://pan.baidu.com/s/1408PoziVAA8E3DojxUq1Hw?pwd=s4ma)] [[Github Releases](https://github.com/zhengli97/CTKD/releases/tag/pretrained-models)]   |
 
 If you want to train your teacher model, please consider using `./scripts/run_cifar_vanilla.sh` or `./scripts/run_imagenet_vanilla.sh`.
 
