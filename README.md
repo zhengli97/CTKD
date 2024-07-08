@@ -8,7 +8,7 @@
 
 ## 💡 Note 
 
-The implementation of instance-wise temperature has been publicly released, please check the following **readme** carefully.
+The implementation of instance-wise temperature has been publicly released, please check the following **README** carefully.
 
 ## Abstract
 
@@ -85,6 +85,9 @@ After the training process, put your teacher model to `./save/models`.
     ```
 
 ## Model Zoo & Training Logs
+
+### Global Temperature
+
 We provide complete training configs, logs, and models for your reference.
 
 CIFAR-100:
@@ -93,7 +96,7 @@ CIFAR-100:
 (Teacher: RN-56, Student: RN-20)  
 [[Baidu Cloud](https://pan.baidu.com/s/13-z-T4ooQDlWrm4isEH4qA?pwd=3bmy)] [[Google](https://drive.google.com/drive/folders/1pT8zmmOFMs5MqDLP6b4Cobv422CAcVF4?usp=sharing)]
 
-## Instance-wise Temperature
+### Instance-wise Temperature
 
 The detailed implementation and training log of instance-wise CTKD are provided for your reference.  
 [[Baidu Cloud](https://pan.baidu.com/s/1SG0dCLjTATIOOy2-2JFCbA?pwd=inx5)][[Google Drive](https://drive.google.com/drive/folders/12rgry4kXCmublAonPjTHfhhxE51zmF4Q?usp=sharing)]
@@ -119,10 +122,13 @@ def KL_Loss(output_batch, teacher_outputs, T):
     return loss
 ```
 
+## Contact
+
+If you have any questions, you can submit an issue on GitHub, leave a message on Zhihu Article (if you can speak Chinese), or contact me by email (zhengli97[at]qq.com).
 
 ## Citation
 
-If this repo is helpful for your research, please consider citing our paper and giving this repo a star ⭐.
+If this repo is helpful for your research, please consider citing our paper and giving this repo a star ⭐. Thank you!
 
 ```
 @inproceedings{li2023curriculum,
@@ -135,5 +141,3 @@ If this repo is helpful for your research, please consider citing our paper and 
   year={2023}
 }
 ```
-
-For any questions, please contact me via email (zhengli97@mail.nankai.edu.cn).
