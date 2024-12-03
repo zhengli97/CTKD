@@ -72,7 +72,7 @@ After the training process, put your teacher model to `./save/models`.
 - Download the dataset and change the path in `./dataset/cifar100.py line 27` to your current dataset path.
 - Modify the script `scripts/run_cifar_distill.sh` according to your needs.
 - Run the script.
-    ```  bash
+    ```
     sh scripts/run_cifar_distill.sh  
     ```
 
@@ -80,7 +80,7 @@ After the training process, put your teacher model to `./save/models`.
 - Download the dataset and change the path in `./dataset/imagenet.py line 21` to your current dataset path.
 - Modify the script `scripts/run_imagenet_distill.sh` according to your needs.
 - Run the script.
-    ```  bash
+    ```
     sh scripts/run_imagenet_distill.sh  
     ```
 
@@ -124,7 +124,7 @@ def KL_Loss(output_batch, teacher_outputs, T):
 
 ## Contact
 
-If you have any questions, you can submit an issue on GitHub, leave a message on Zhihu Article (if you can speak Chinese), or contact me by email (zhengli97[at]qq.com).
+If you have any questions, you can submit an [issue](https://github.com/zhengli97/CTKD/issues) on GitHub, leave a message on [Zhihu Article](https://zhuanlan.zhihu.com/p/595735843) (if you can speak Chinese), or contact me by email (zhengli97[at]qq.com).
 
 ## Citation
 
